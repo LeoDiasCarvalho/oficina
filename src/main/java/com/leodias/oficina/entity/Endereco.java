@@ -112,4 +112,10 @@ public class Endereco implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 
+	@Override
+	public String toString() {
+		return "Endereco [id=" + id + ", logradouro=" + logradouro + ", bairro=" + bairro + ", cep=" + cep + ", cidade="
+				+ cidade + ", estado=" + estado + "]";
+	}
+
 }

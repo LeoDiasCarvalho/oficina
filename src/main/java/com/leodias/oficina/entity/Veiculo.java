@@ -112,7 +112,11 @@ public class Veiculo implements Serializable{
 		Veiculo other = (Veiculo) obj;
 		return Objects.equals(id, other.id) && Objects.equals(placa, other.placa);
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Veiculo [id=" + id + ", placa=" + placa + ", nome=" + nome + ", modelo=" + modelo + ", marca=" + marca
+				+ ", anoFabricacao=" + anoFabricacao + "]";
+	}
 
 }

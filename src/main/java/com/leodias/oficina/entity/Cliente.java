@@ -27,6 +27,7 @@ public class Cliente implements Serializable{
 	private String nomeMae;
 	private String numeroCasa;
 	
+
 	@OneToMany(mappedBy = "cliente")
 	private List<Telefone> telefones = new ArrayList<>();
 	
@@ -140,6 +141,10 @@ public class Cliente implements Serializable{
 				&& Objects.equals(numeroCasa, other.numeroCasa);
 	}
 
-
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento
+				+ ", nomeMae=" + nomeMae + "]";
+	}
 	
 }

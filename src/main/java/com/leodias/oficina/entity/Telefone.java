@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Telefone implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -19,11 +21,16 @@ public class Telefone implements Serializable{
 	private Integer id;
 	private String numero;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
 	public Telefone() {
+	}
+	public Telefone(Integer id, String numero) {
+		this.id = id;
+		this.numero = numero;
 	}
 
 	public Telefone(Integer id, String numero, Cliente cliente) {
@@ -72,5 +79,12 @@ public class Telefone implements Serializable{
 		Telefone other = (Telefone) obj;
 		return Objects.equals(id, other.id) && Objects.equals(numero, other.numero);
 	}
+
+	@Override
+	public String toString() {
+		return "Telefone [id=" + id + ", numero=" + numero + "]";
+	}
+
+		
 
 }
