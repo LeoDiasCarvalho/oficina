@@ -2,6 +2,7 @@ package com.leodias.oficina;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,12 +11,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.leodias.oficina.entity.Cliente;
 import com.leodias.oficina.entity.Endereco;
+import com.leodias.oficina.entity.Servico;
 import com.leodias.oficina.entity.Telefone;
 import com.leodias.oficina.entity.Veiculo;
+import com.leodias.oficina.entity.Venda;
 import com.leodias.oficina.repositories.ClienteRepository;
 import com.leodias.oficina.repositories.EnderecoRepository;
+import com.leodias.oficina.repositories.ServicoRepository;
 import com.leodias.oficina.repositories.TelefoneRepository;
 import com.leodias.oficina.repositories.VeiculoRepository;
+import com.leodias.oficina.repositories.VendaRepository;
 
 @SpringBootApplication
 public class OficinaApplication implements CommandLineRunner{
@@ -34,6 +39,10 @@ public class OficinaApplication implements CommandLineRunner{
 	private EnderecoRepository enderecoRepo;
 	@Autowired
 	private VeiculoRepository veiculoRepo;
+	@Autowired
+	private ServicoRepository servicoRepo;
+	@Autowired
+	private VendaRepository vendaRepo;
 	
 	
 	@Override
@@ -58,11 +67,22 @@ public class OficinaApplication implements CommandLineRunner{
 		Veiculo v2 = new Veiculo(null, "hhh7890", "Fiesta", "Sedan 1.6", "Ford", "2011", c3);
 		Veiculo v3 = new Veiculo(null, "aaa1234", "Corolla", "el 1.8 automatico", "Toyota", "2015", c2);
 		
+		Servico s1 = new Servico(null, "Troca de oléo", 100.00);
+		Servico s2 = new Servico(null, "Troca de amortecedores dianteiros", 350.00);
+		Servico s3 = new Servico(null, "Troca de amortecedores traseiros", 450.00);
 		
+		Venda venda1 = new Venda(null, new Date(), 0.0, s1.getPreco(), c3);
+		Venda venda2 = new Venda(null, new Date(), 50.00, s3.getPreco() , c1);
+		
+		venda1.getServicos().addAll(Arrays.asList(s1));
+		venda2.getServicos().addAll(Arrays.asList(s3));
+		
+		servicoRepo.saveAll(Arrays.asList(s1, s2, s3));
 		enderecoRepo.saveAll(Arrays.asList(e1));
 		clienteRepo.saveAll(Arrays.asList(c1, c2, c3));
 		telefoneRepo.saveAll(Arrays.asList(t1, t2, t3, t4));
 		veiculoRepo.saveAll(Arrays.asList(v1, v2, v3));
+		vendaRepo.saveAll(Arrays.asList(venda1, venda2));
 		
 	}
 

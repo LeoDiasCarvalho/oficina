@@ -44,7 +44,7 @@ public class Venda implements Serializable{
 		this.id = id;
 		this.momento = momento;
 		this.desconto = desconto;
-		this.valorTotal = valorTotal;
+		this.valorTotal = valorTotal - desconto;
 		this.cliente = cliente;
 	}
 
